@@ -1,0 +1,277 @@
+NAME
+    Perinci::Sub::Gen::AccessTable::DBI - Generate function (and its Rinci
+    metadata) to access DBI table data
+
+VERSION
+    version 0.01
+
+SYNOPSIS
+    Your database table "countries":
+
+     | id | eng_name                 | ind_name        |
+     |----+--------------------------+-----------------|
+     | cn | China                    | Cina            |
+     | id | Indonesia                | Indonesia       |
+     | sg | Singapore                | Singapura       |
+     | us | United States of America | Amerika Serikat |
+
+    In list_countries.pl:
+
+     #!perl
+     use strict;
+     use warnings;
+     use Perinci::CmdLine;
+     use Perinci::Sub::Gen::AccessTable::DBI qw(gen_read_dbi_table_func);
+
+     our %SPEC;
+
+     my $res = gen_read_dbi_table_func(
+         summary     => 'func summary',     # opt
+         description => 'func description', # opt
+         dbh         => ...,
+         table_name  => 'countries',
+         table_spec  => {
+             summary => 'List of countries',
+             fields => {
+                 id => {
+                     schema => 'str*',
+                     summary => 'ISO 2-letter code for the country',
+                     index => 0,
+                     sortable => 1,
+                 },
+                 eng_name => {
+                     schema => 'str*',
+                     summary => 'English name',
+                     index => 1,
+                     sortable => 1,
+                 },
+                 ind_name => {
+                     schema => 'str*',
+                     summary => 'Indonesian name',
+                     index => 2,
+                     sortable => 1,
+                 },
+             },
+             pk => 'id',
+         },
+     );
+     die "Can't generate function: $res->[0] - $res->[1]" unless $res->[0] == 200;
+     *list_countries       = $res->[2]{code};
+     $SPEC{list_countries} = $res->[2]{meta};
+
+     Perinci::CmdLine->new(url=>'/main/list_countries')->run;
+
+    Now you can do:
+
+     # list all countries, by default only PK field is shown
+     $ list_countries.pl --format=text-simple
+     cn
+     id
+     sg
+     us
+
+     # show as json, randomize order
+     $ list_countries.pl --format=json --random
+     ["id","us","sg","cn"]
+
+     # only list countries which contain 'Sin', show all fields (--detail)
+     $ list_countries.pl --q=Sin --detail
+     .----------------------------.
+     | eng_name  | id | ind_name  |
+     +-----------+----+-----------+
+     | Singapore | sg | Singapura |
+     '-----------+----+-----------+
+
+     # show only certain fields, limit number of records, return in YAML format
+     $ list_countries.pl --fields '[id, eng_name]' --result-limit 2 --format=yaml
+     - 200
+     - OK
+     -
+       - id: cn
+         eng_name: China
+       - id: id
+         eng_name: Indonesia
+
+DESCRIPTION
+    This module is just like Perinci::Sub::Gen::AccessTable, except that
+    table data source is from DBI.
+
+    Supported databases: SQLite, MySQL, PostgreSQL.
+
+    Early versions tested on: SQLite.
+
+CAVEATS
+    It is often not a good idea to expose your database schema directly as
+    API.
+
+TODO
+    *   Generate table_spec from database schema, if unspecified
+
+FAQ
+SEE ALSO
+    Perinci::Sub::Gen::AccessTable
+
+DESCRIPTION
+    This module has Rinci metadata.
+
+FUNCTIONS
+    None are exported by default, but they are exportable.
+
+  gen_read_dbi_table_func(%args) -> [status, msg, result, meta]
+    Generate function (and its metadata) to read DBI table.
+
+    The generated function acts like a simple single table SQL SELECT query,
+    featuring filtering, ordering, and paging, but using arguments as the
+    'query language'. The generated function is suitable for exposing a
+    table data from an API function. Please see
+    Perinci::Sub::Gen::AccessTable's documentation for more details on what
+    arguments the generated function will accept.
+
+    Arguments ('*' denotes required arguments):
+
+    *   case_insensitive_search => *bool* (default: 1)
+
+        Decide whether generated function will perform case-insensitive
+        search.
+
+    *   custom_filters => *hash*
+
+        Supply custom filters.
+
+        A hash of filter name and definitions. Filter name will be used as
+        generated function's argument and must not clash with other
+        arguments. Filter definition is a hash containing these keys: *meta*
+        (hash, argument metadata), *code*, *fields* (array, list of table
+        fields related to this field).
+
+        Code will be called for each record to be filtered and will be
+        supplied ($r, $v, $opts) where $v is the filter value (from the
+        function argument) and $r the hashref record value. $opts is
+        currently empty. Code should return true if record satisfies the
+        filter.
+
+    *   custom_search => *code*
+
+        Supply custom searching for generated function.
+
+        Code will be supplied ($r, $q, $opts) where $r is the record
+        (hashref), $q is the search term (from the function argument 'q'),
+        and $opts is {ci=>0|1}. Code should return true if record matches
+        search term.
+
+    *   dbh* => *obj*
+
+        DBI database handle.
+
+    *   default_arg_values => *hash*
+
+        Specify defaults for generated function's arguments.
+
+        Can be used to supply default filters, e.g.
+
+            # limit years for credit card expiration date
+            { "year.min" => $curyear, "year.max" => $curyear+10, }
+
+    *   default_detail => *bool*
+
+        Supply default 'detail' value for function arg spec.
+
+    *   default_fields => *str*
+
+        Supply default 'fields' value for function arg spec.
+
+    *   default_random => *bool*
+
+        Supply default 'random' value in generated function's metadata.
+
+    *   default_result_limit => *int*
+
+        Supply default 'result_limit' value in generated function's
+        metadata.
+
+    *   default_sort => *str*
+
+        Supply default 'sort' value in generated function's metadata.
+
+    *   default_with_field_names => *bool*
+
+        Supply default 'with_field_names' value in generated function's
+        metadata.
+
+    *   description* => *str*
+
+        Generated function's description.
+
+    *   enable_search => *bool* (default: 1)
+
+        Decide whether generated function will support searching (argument
+        q).
+
+    *   langs => *array* (default: ["en_US"])
+
+        Choose language for function metadata.
+
+        This function can generate metadata containing text from one or more
+        languages. For example if you set 'langs' to ['en*US', 'id*ID'] then
+        the generated function metadata might look something like this:
+
+            {
+                v => 1.1,
+                args => {
+                    random => {
+                        summary => 'Random order of results', # English
+                        "summary.alt.lang.id_ID" => "Acak urutan hasil", # Indonesian
+                        ...
+                    },
+                    ...
+                },
+                ...
+            }
+
+    *   summary* => *str*
+
+        Generated function's summary.
+
+    *   table_name* => *str*
+
+        DBI table name.
+
+    *   table_spec* => *hash*
+
+        Table specification.
+
+        Just like Perinci::Sub::Gen::AccessTable's table*spec, except that
+        each field specification can have a key called "db_field" to specify
+        the database field (if different). Currently this is required.
+        Future version will be able to generate table*spec from table schema
+        if table_spec is not specified.
+
+    *   word_search => *bool* (default: 0)
+
+        Decide whether generated function will perform word searching
+        instead of string searching.
+
+        For example, if search term is 'pine' and field value is 'green
+        pineapple', search will match if word*search=false, but won't match
+        under word*search.
+
+        This will not have effect under 'custom_search'.
+
+    Return value:
+
+    Returns an enveloped result (an array). First element (status) is an
+    integer containing HTTP status code (200 means OK, 4xx caller error, 5xx
+    function error). Second element (msg) is a string containing error
+    message, or 'OK' if status is 200. Third element (result) is optional,
+    the actual result. Fourth element (meta) is called result metadata and
+    is optional, a hash that contains extra information.
+
+AUTHOR
+    Steven Haryanto <stevenharyanto@gmail.com>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2012 by Steven Haryanto.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+
