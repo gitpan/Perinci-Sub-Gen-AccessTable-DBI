@@ -18,7 +18,7 @@ our @EXPORT_OK = qw(gen_read_dbi_table_func);
 
 with 'SHARYANTO::Role::I18NMany';
 
-our $VERSION = '0.01'; # VERSION
+our $VERSION = '0.02'; # VERSION
 
 our %SPEC;
 my $label = "(gen_read_dbi_table_func)";
@@ -213,7 +213,7 @@ Perinci::Sub::Gen::AccessTable::DBI - Generate function (and its Rinci metadata)
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 
@@ -237,6 +237,7 @@ In list_countries.pl:
  our %SPEC;
 
  my $res = gen_read_dbi_table_func(
+     name        => 'list_countries',
      summary     => 'func summary',     # opt
      description => 'func description', # opt
      dbh         => ...,
@@ -267,8 +268,6 @@ In list_countries.pl:
      },
  );
  die "Can't generate function: $res->[0] - $res->[1]" unless $res->[0] == 200;
- *list_countries       = $res->[2]{code};
- $SPEC{list_countries} = $res->[2]{meta};
 
  Perinci::CmdLine->new(url=>'/main/list_countries')->run;
 
@@ -306,7 +305,9 @@ Now you can do:
 =head1 DESCRIPTION
 
 This module is just like L<Perinci::Sub::Gen::AccessTable>, except that table
-data source is from DBI.
+data source is from DBI. gen_read_dbi_table_func() accept mostly the same
+arguments as gen_read_table_func(), except: 'table_name' instead of
+'table_data', and 'dbh'.
 
 Supported databases: SQLite, MySQL, PostgreSQL.
 
@@ -425,6 +426,14 @@ Generated function's description.
 
 Decide whether generated function will support searching (argument q).
 
+=item * B<install> => I<bool> (default: 1)
+
+Whether to install generated function (and metadata).
+
+By default, generated function will be installed to the specified (or caller's)
+package, as well as its generated metadata into %SPEC. Set this argument to
+false to skip installing.
+
 =item * B<langs> => I<array> (default: ["en_US"])
 
 Choose language for function metadata.
@@ -445,6 +454,19 @@ metadata might look something like this:
         },
         ...
     }
+
+=item * B<name>* => I<str>
+
+Generated function's name, e.g. `myfunc`.
+
+=item * B<package>* => I<str>
+
+Generated function's package, e.g. `My::Package`.
+
+This is needed mostly for installing the function. You usually don't need to
+supply this if you set C<install> to false.
+
+If not specified, caller's package will be used by default.
 
 =item * B<summary>* => I<str>
 

@@ -30,7 +30,7 @@
             "Data::Clone" : 0,
             "Log::Any" : 0,
             "Moo" : 0,
-            "Perinci::Sub::Gen::AccessTable" : 0,
+            "Perinci::Sub::Gen::AccessTable" : "0.14",
             "Rinci" : "v1.1.13",
             "SHARYANTO::Role::I18NMany" : "0.17",
             "perl" : "5.010001"
@@ -50,6 +50,6 @@
          "url" : "http://github.com/sharyanto/perl-Perinci-Sub-Gen-AccessTable-DBI"
       }
    },
-   "version" : "0.01"
+   "version" : "0.02"
 }
 

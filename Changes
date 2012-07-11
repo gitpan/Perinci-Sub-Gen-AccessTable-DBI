@@ -1,5 +1,11 @@
 Revision history for Perinci-Sub-Gen-AccessTable-DBI
 
+0.02     2012-07-11 (SHARYANTO)
+
+         No functional changes. Rebuild to update POD to
+         Perinci::Sub::Gen::AccessTable 0.14.
+
+
 0.01     2012-07-05 (SHARYANTO)
 
          First release.

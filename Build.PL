@@ -19,7 +19,7 @@ my %module_build_args = (
     "Steven Haryanto <stevenharyanto\@gmail.com>"
   ],
   "dist_name" => "Perinci-Sub-Gen-AccessTable-DBI",
-  "dist_version" => "0.01",
+  "dist_version" => "0.02",
   "license" => "perl",
   "module_name" => "Perinci::Sub::Gen::AccessTable::DBI",
   "recommends" => {},
@@ -29,7 +29,7 @@ my %module_build_args = (
     "Data::Clone" => 0,
     "Log::Any" => 0,
     "Moo" => 0,
-    "Perinci::Sub::Gen::AccessTable" => 0,
+    "Perinci::Sub::Gen::AccessTable" => "0.14",
     "Rinci" => "1.1.13",
     "SHARYANTO::Role::I18NMany" => "0.17",
     "perl" => "5.010001"
