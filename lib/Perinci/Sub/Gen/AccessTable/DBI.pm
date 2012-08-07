@@ -9,16 +9,15 @@ use Moo; # we go OO just for the I18N, we don't store attributes, etc
 use Data::Clone;
 use Data::Sah;
 use DBI;
-use Perinci::Sub::Gen::AccessTable qw(gen_read_table_func);
+# don't wrap to avoid adding to call stack
+use Perinci::Sub::Gen::AccessTable 0.15 gen_read_table_func => {wrap=>0};
 #use Data::Sah;
 
-use Exporter;
-our @ISA = qw(Exporter);
-our @EXPORT_OK = qw(gen_read_dbi_table_func);
+use Perinci::Exporter;
 
 with 'SHARYANTO::Role::I18NMany';
 
-our $VERSION = '0.04'; # VERSION
+our $VERSION = '0.05'; # VERSION
 
 our %SPEC;
 my $label = "(gen_read_dbi_table_func)";
@@ -210,7 +209,7 @@ Perinci::Sub::Gen::AccessTable::DBI - Generate function (and its Rinci metadata)
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 

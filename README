@@ -3,7 +3,7 @@ NAME
     metadata) to access DBI table data
 
 VERSION
-    version 0.04
+    version 0.05
 
 SYNOPSIS
     Your database table "countries":

@@ -20,6 +20,7 @@ requires:
   Data::Clone: 0
   Log::Any: 0
   Moo: 0
+  Perinci::Exporter: 0
   Perinci::Sub::Gen::AccessTable: 0.15
   Rinci: 1.1.13
   SHARYANTO::Role::I18NMany: 0.17
@@ -27,4 +28,4 @@ requires:
 resources:
   homepage: http://metacpan.org/release/Perinci-Sub-Gen-AccessTable-DBI
   repository: http://github.com/sharyanto/perl-Perinci-Sub-Gen-AccessTable-DBI
-version: 0.04
+version: 0.05
