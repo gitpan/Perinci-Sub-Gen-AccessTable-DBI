@@ -18,7 +18,7 @@ our @EXPORT_OK = qw(gen_read_dbi_table_func);
 
 with 'SHARYANTO::Role::I18NMany';
 
-our $VERSION = '0.03'; # VERSION
+our $VERSION = '0.04'; # VERSION
 
 our %SPEC;
 my $label = "(gen_read_dbi_table_func)";
@@ -58,10 +58,9 @@ $spec->{args}{dbh} = {
 };
 $SPEC{gen_read_dbi_table_func} = $spec;
 sub gen_read_dbi_table_func {
-    my %args = @_;
-
     my $self = __PACKAGE__->new;
-    $self->_gen_read_dbi_table_func(%args);
+    unshift @_, $self;
+    goto &_gen_read_dbi_table_func;
 }
 
 sub _gen_read_dbi_table_func {
@@ -194,10 +193,8 @@ sub _gen_read_dbi_table_func {
          };
     };
 
-    gen_read_table_func(
-        %args,
-        table_data => $table_data,
-    );
+    @_ = (%args, table_data => $table_data);
+    goto &gen_read_table_func;
 }
 
 1;
@@ -213,7 +210,7 @@ Perinci::Sub::Gen::AccessTable::DBI - Generate function (and its Rinci metadata)
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 

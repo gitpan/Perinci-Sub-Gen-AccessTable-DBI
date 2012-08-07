@@ -210,17 +210,19 @@ test_gen(
     },
 );
 
+# as well as testing install => 1
 test_gen(
     name => 'search',
+    func_name => 'foo1',
+    install => 1,
     table_name => $table_name,
     table_spec => $table_spec,
     status => 200,
     post_test => sub {
         my ($res) = @_;
-        my $func = $res->[2]{code};
 
-        test_query($func, {q=>"b"}, 1, 'search b');
-        test_query($func, {q=>"B"}, 1, 'search B');
+        test_query(\&main::foo1, {q=>"b"}, 1, 'search b');
+        test_query(\&main::foo1, {q=>"B"}, 1, 'search B');
     },
 );
 
