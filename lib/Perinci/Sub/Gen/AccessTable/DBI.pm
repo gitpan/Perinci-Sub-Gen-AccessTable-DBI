@@ -18,7 +18,7 @@ our @EXPORT_OK = qw(gen_read_dbi_table_func);
 
 with 'SHARYANTO::Role::I18NMany';
 
-our $VERSION = '0.02'; # VERSION
+our $VERSION = '0.03'; # VERSION
 
 our %SPEC;
 my $label = "(gen_read_dbi_table_func)";
@@ -213,7 +213,7 @@ Perinci::Sub::Gen::AccessTable::DBI - Generate function (and its Rinci metadata)
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 
@@ -381,7 +381,7 @@ Code will be supplied ($r, $q, $opts) where $r is the record (hashref), $q is
 the search term (from the function argument 'q'), and $opts is {ci=>0|1}. Code
 should return true if record matches search term.
 
-=item * B<dbh>* => I<obj>
+=item * B<dbh> => I<obj>
 
 DBI database handle.
 
@@ -418,7 +418,7 @@ Supply default 'sort' value in generated function's metadata.
 
 Supply default 'with_field_names' value in generated function's metadata.
 
-=item * B<description>* => I<str>
+=item * B<description> => I<str>
 
 Generated function's description.
 
@@ -459,7 +459,7 @@ metadata might look something like this:
 
 Generated function's name, e.g. `myfunc`.
 
-=item * B<package>* => I<str>
+=item * B<package> => I<str>
 
 Generated function's package, e.g. `My::Package`.
 
@@ -468,7 +468,7 @@ supply this if you set C<install> to false.
 
 If not specified, caller's package will be used by default.
 
-=item * B<summary>* => I<str>
+=item * B<summary> => I<str>
 
 Generated function's summary.
 

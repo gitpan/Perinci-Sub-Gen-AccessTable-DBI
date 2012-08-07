@@ -3,7 +3,7 @@ NAME
     metadata) to access DBI table data
 
 VERSION
-    version 0.02
+    version 0.03
 
 SYNOPSIS
     Your database table "countries":
@@ -160,7 +160,7 @@ FUNCTIONS
         and $opts is {ci=>0|1}. Code should return true if record matches
         search term.
 
-    *   dbh* => *obj*
+    *   dbh => *obj*
 
         DBI database handle.
 
@@ -199,7 +199,7 @@ FUNCTIONS
         Supply default 'with_field_names' value in generated function's
         metadata.
 
-    *   description* => *str*
+    *   description => *str*
 
         Generated function's description.
 
@@ -241,7 +241,7 @@ FUNCTIONS
 
         Generated function's name, e.g. `myfunc`.
 
-    *   package* => *str*
+    *   package => *str*
 
         Generated function's package, e.g. `My::Package`.
 
@@ -250,7 +250,7 @@ FUNCTIONS
 
         If not specified, caller's package will be used by default.
 
-    *   summary* => *str*
+    *   summary => *str*
 
         Generated function's summary.
 

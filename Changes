@@ -1,5 +1,12 @@
 Revision history for Perinci-Sub-Gen-AccessTable-DBI
 
+0.03     2012-08-07 (SHARYANTO)
+
+         No functional changes. Adjust test to not open tempfile to see if this
+         will alleviate 'db is locked' SQLite error CT reports (mostly on
+         OpenBSD/FreeBSD).
+
+
 0.02     2012-07-11 (SHARYANTO)
 
          No functional changes. Rebuild to update POD to

@@ -3,7 +3,7 @@ package Perinci::Sub::Gen::AccessTable::DBI::I18N;
 use parent 'Locale::Maketext';
 use Locale::Maketext::Lexicon;
 
-our $VERSION = '0.02'; # VERSION
+our $VERSION = '0.03'; # VERSION
 
 1;
 # ABSTRACT: Project class for Perinci::Sub::Gen:AccessTable::DBI
@@ -17,7 +17,7 @@ Perinci::Sub::Gen::AccessTable::DBI::I18N - Project class for Perinci::Sub::Gen:
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 DESCRIPTION
 

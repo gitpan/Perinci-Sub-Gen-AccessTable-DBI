@@ -27,4 +27,4 @@ requires:
 resources:
   homepage: http://metacpan.org/release/Perinci-Sub-Gen-AccessTable-DBI
   repository: http://github.com/sharyanto/perl-Perinci-Sub-Gen-AccessTable-DBI
-version: 0.02
+version: 0.03
