@@ -7,22 +7,22 @@ use Log::Any '$log';
 use Moo; # we go OO just for the I18N, we don't store attributes, etc
 
 use Data::Clone;
-use Data::Sah;
 use DBI;
-# don't wrap to avoid adding to call stack
-use Perinci::Sub::Gen::AccessTable 0.15 gen_read_table_func => {wrap=>0};
-#use Data::Sah;
+use Perinci::Sub::Gen::AccessTable 0.17 qw(gen_read_table_func);
 
-use Perinci::Exporter;
+require Exporter;
+our @ISA       = qw(Exporter);
+our @EXPORT_OK = qw(gen_read_dbi_table_func);
 
 with 'SHARYANTO::Role::I18NMany';
 
-our $VERSION = '0.05'; # VERSION
+our $VERSION = '0.06'; # VERSION
 
 our %SPEC;
 my $label = "(gen_read_dbi_table_func)";
 
 sub __parse_schema {
+    require Data::Sah;
     Data::Sah::normalize_schema($_[0]);
 }
 
@@ -209,7 +209,7 @@ Perinci::Sub::Gen::AccessTable::DBI - Generate function (and its Rinci metadata)
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 SYNOPSIS
 
@@ -327,15 +327,8 @@ It is often not a good idea to expose your database schema directly as API.
 
 L<Perinci::Sub::Gen::AccessTable>
 
-=head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
-
 =head1 FUNCTIONS
 
-
-None are exported by default, but they are exportable.
 
 =head2 gen_read_dbi_table_func(%args) -> [status, msg, result, meta]
 
@@ -361,8 +354,8 @@ Supply custom filters.
 
 A hash of filter name and definitions. Filter name will be used as generated
 function's argument and must not clash with other arguments. Filter definition
-is a hash containing these keys: I<meta> (hash, argument metadata), I<code>,
-I<fields> (array, list of table fields related to this field).
+is a hash containing these keys: B<meta> (hash, argument metadata), B<code>,
+B<fields> (array, list of table fields related to this field).
 
 Code will be called for each record to be filtered and will be supplied ($r, $v,
 $opts) where $v is the filter value (from the function argument) and $r the
@@ -377,7 +370,7 @@ Code will be supplied ($r, $q, $opts) where $r is the record (hashref), $q is
 the search term (from the function argument 'q'), and $opts is {ci=>0|1}. Code
 should return true if record matches search term.
 
-=item * B<dbh> => I<obj>
+=item * B<dbh>* => I<obj>
 
 DBI database handle.
 
@@ -414,7 +407,7 @@ Supply default 'sort' value in generated function's metadata.
 
 Supply default 'with_field_names' value in generated function's metadata.
 
-=item * B<description> => I<str>
+=item * B<description>* => I<str>
 
 Generated function's description.
 
@@ -435,7 +428,7 @@ false to skip installing.
 Choose language for function metadata.
 
 This function can generate metadata containing text from one or more languages.
-For example if you set 'langs' to ['enI<US', 'id>ID'] then the generated function
+For example if you set 'langs' to ['enB<US', 'id>ID'] then the generated function
 metadata might look something like this:
 
     {
@@ -455,7 +448,7 @@ metadata might look something like this:
 
 Generated function's name, e.g. `myfunc`.
 
-=item * B<package> => I<str>
+=item * B<package>* => I<str>
 
 Generated function's package, e.g. `My::Package`.
 
@@ -464,7 +457,7 @@ supply this if you set C<install> to false.
 
 If not specified, caller's package will be used by default.
 
-=item * B<summary> => I<str>
+=item * B<summary>* => I<str>
 
 Generated function's summary.
 
@@ -476,7 +469,7 @@ DBI table name.
 
 Table specification.
 
-Just like Perinci::Sub::Gen::AccessTable's tableI<spec, except that each field
+Just like Perinci::Sub::Gen::AccessTable's tableB<spec, except that each field
 specification can have a key called C<db_field> to specify the database field (if
 different). Currently this is required. Future version will be able to generate
 table>spec from table schema if table_spec is not specified.
@@ -486,7 +479,7 @@ table>spec from table schema if table_spec is not specified.
 Decide whether generated function will perform word searching instead of string searching.
 
 For example, if search term is 'pine' and field value is 'green pineapple',
-search will match if wordI<search=false, but won't match under word>search.
+search will match if wordB<search=false, but won't match under word>search.
 
 This will not have effect under 'custom_search'.
 

@@ -3,7 +3,7 @@ NAME
     metadata) to access DBI table data
 
 VERSION
-    version 0.05
+    version 0.06
 
 SYNOPSIS
     Your database table "countries":
@@ -112,12 +112,7 @@ FAQ
 SEE ALSO
     Perinci::Sub::Gen::AccessTable
 
-DESCRIPTION
-    This module has Rinci metadata.
-
 FUNCTIONS
-    None are exported by default, but they are exportable.
-
   gen_read_dbi_table_func(%args) -> [status, msg, result, meta]
     Generate function (and its metadata) to read DBI table.
 
@@ -141,9 +136,9 @@ FUNCTIONS
 
         A hash of filter name and definitions. Filter name will be used as
         generated function's argument and must not clash with other
-        arguments. Filter definition is a hash containing these keys: *meta*
-        (hash, argument metadata), *code*, *fields* (array, list of table
-        fields related to this field).
+        arguments. Filter definition is a hash containing these keys: meta
+        (hash, argument metadata), code, fields (array, list of table fields
+        related to this field).
 
         Code will be called for each record to be filtered and will be
         supplied ($r, $v, $opts) where $v is the filter value (from the
@@ -160,7 +155,7 @@ FUNCTIONS
         and $opts is {ci=>0|1}. Code should return true if record matches
         search term.
 
-    *   dbh => *obj*
+    *   dbh* => *obj*
 
         DBI database handle.
 
@@ -199,7 +194,7 @@ FUNCTIONS
         Supply default 'with_field_names' value in generated function's
         metadata.
 
-    *   description => *str*
+    *   description* => *str*
 
         Generated function's description.
 
@@ -221,7 +216,7 @@ FUNCTIONS
         Choose language for function metadata.
 
         This function can generate metadata containing text from one or more
-        languages. For example if you set 'langs' to ['en*US', 'id*ID'] then
+        languages. For example if you set 'langs' to ['enUS', 'idID'] then
         the generated function metadata might look something like this:
 
             {
@@ -241,7 +236,7 @@ FUNCTIONS
 
         Generated function's name, e.g. `myfunc`.
 
-    *   package => *str*
+    *   package* => *str*
 
         Generated function's package, e.g. `My::Package`.
 
@@ -250,7 +245,7 @@ FUNCTIONS
 
         If not specified, caller's package will be used by default.
 
-    *   summary => *str*
+    *   summary* => *str*
 
         Generated function's summary.
 
@@ -262,10 +257,10 @@ FUNCTIONS
 
         Table specification.
 
-        Just like Perinci::Sub::Gen::AccessTable's table*spec, except that
+        Just like Perinci::Sub::Gen::AccessTable's tablespec, except that
         each field specification can have a key called "db_field" to specify
         the database field (if different). Currently this is required.
-        Future version will be able to generate table*spec from table schema
+        Future version will be able to generate tablespec from table schema
         if table_spec is not specified.
 
     *   word_search => *bool* (default: 0)
@@ -274,8 +269,8 @@ FUNCTIONS
         instead of string searching.
 
         For example, if search term is 'pine' and field value is 'green
-        pineapple', search will match if word*search=false, but won't match
-        under word*search.
+        pineapple', search will match if wordsearch=false, but won't match
+        under wordsearch.
 
         This will not have effect under 'custom_search'.
 

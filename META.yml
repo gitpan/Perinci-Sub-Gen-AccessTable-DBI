@@ -9,7 +9,7 @@ build_requires:
 configure_requires:
   Module::Build: 0.3601
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.300006, CPAN::Meta::Converter version 2.113640'
+generated_by: 'Dist::Zilla version 4.300015, CPAN::Meta::Converter version 2.120921'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -18,14 +18,16 @@ name: Perinci-Sub-Gen-AccessTable-DBI
 requires:
   DBI: 0
   Data::Clone: 0
+  Data::Sah: 0
+  Locale::Maketext::Lexicon: 0
+  Locale::Maketext::Lexicon::Gettext: 0
   Log::Any: 0
   Moo: 0
-  Perinci::Exporter: 0
-  Perinci::Sub::Gen::AccessTable: 0.15
-  Rinci: 1.1.13
+  Perinci::Sub::Gen::AccessTable: 0.17
+  Rinci: v1.1.13
   SHARYANTO::Role::I18NMany: 0.17
   perl: 5.010001
 resources:
   homepage: http://metacpan.org/release/Perinci-Sub-Gen-AccessTable-DBI
   repository: http://github.com/sharyanto/perl-Perinci-Sub-Gen-AccessTable-DBI
-version: 0.05
+version: 0.06

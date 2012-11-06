@@ -4,7 +4,7 @@
       "Steven Haryanto <stevenharyanto@gmail.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300006, CPAN::Meta::Converter version 2.113640",
+   "generated_by" : "Dist::Zilla version 4.300015, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -24,14 +24,21 @@
             "Module::Build" : "0.3601"
          }
       },
+      "develop" : {
+         "requires" : {
+            "Test::Rinci" : "0.01"
+         }
+      },
       "runtime" : {
          "requires" : {
-            "DBI" : 0,
-            "Data::Clone" : 0,
-            "Log::Any" : 0,
-            "Moo" : 0,
-            "Perinci::Exporter" : 0,
-            "Perinci::Sub::Gen::AccessTable" : "0.15",
+            "DBI" : "0",
+            "Data::Clone" : "0",
+            "Data::Sah" : "0",
+            "Locale::Maketext::Lexicon" : "0",
+            "Locale::Maketext::Lexicon::Gettext" : "0",
+            "Log::Any" : "0",
+            "Moo" : "0",
+            "Perinci::Sub::Gen::AccessTable" : "0.17",
             "Rinci" : "v1.1.13",
             "SHARYANTO::Role::I18NMany" : "0.17",
             "perl" : "5.010001"
@@ -39,7 +46,7 @@
       },
       "test" : {
          "requires" : {
-            "DBD::SQLite" : 0,
+            "DBD::SQLite" : "0",
             "Test::More" : "0.96"
          }
       }
@@ -51,6 +58,6 @@
          "url" : "http://github.com/sharyanto/perl-Perinci-Sub-Gen-AccessTable-DBI"
       }
    },
-   "version" : "0.05"
+   "version" : "0.06"
 }
 

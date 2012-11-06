@@ -3,7 +3,7 @@ package Perinci::Sub::Gen::AccessTable::DBI::I18N;
 use parent 'Locale::Maketext';
 use Locale::Maketext::Lexicon;
 
-our $VERSION = '0.05'; # VERSION
+our $VERSION = '0.06'; # VERSION
 
 1;
 # ABSTRACT: Project class for Perinci::Sub::Gen:AccessTable::DBI
@@ -17,17 +17,9 @@ Perinci::Sub::Gen::AccessTable::DBI::I18N - Project class for Perinci::Sub::Gen:
 
 =head1 VERSION
 
-version 0.05
-
-=head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
+version 0.06
 
 =head1 FUNCTIONS
-
-
-None are exported by default, but they are exportable.
 
 =head1 AUTHOR
 
