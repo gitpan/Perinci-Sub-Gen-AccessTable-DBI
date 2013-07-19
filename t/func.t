@@ -100,9 +100,9 @@ test_gen(
                 or diag explain $fres;
             is_deeply($fres->[2],
                       [{s=>'a1'},
-                       {s=>'b1'},
+                       {s=>'a2'},
                        {s=>'a3'},
-                       {s=>'a2'}],
+                       {s=>'b1'}],
                       "result")
                 or diag explain $fres->[2];
         };

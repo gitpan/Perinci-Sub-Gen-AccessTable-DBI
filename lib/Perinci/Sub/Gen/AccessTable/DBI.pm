@@ -1,6 +1,6 @@
 package Perinci::Sub::Gen::AccessTable::DBI;
 
-use 5.010;
+use 5.010001;
 use strict;
 use warnings;
 use Log::Any '$log';
@@ -16,7 +16,7 @@ our @EXPORT_OK = qw(gen_read_dbi_table_func);
 
 with 'SHARYANTO::Role::I18NMany';
 
-our $VERSION = '0.06'; # VERSION
+our $VERSION = '0.07'; # VERSION
 
 our %SPEC;
 my $label = "(gen_read_dbi_table_func)";
@@ -199,9 +199,11 @@ sub _gen_read_dbi_table_func {
 1;
 # ABSTRACT: Generate function (and its Rinci metadata) to access DBI table data
 
-
 __END__
+
 =pod
+
+=encoding utf-8
 
 =head1 NAME
 
@@ -209,7 +211,7 @@ Perinci::Sub::Gen::AccessTable::DBI - Generate function (and its Rinci metadata)
 
 =head1 VERSION
 
-version 0.06
+version 0.07
 
 =head1 SYNOPSIS
 
@@ -327,178 +329,28 @@ It is often not a good idea to expose your database schema directly as API.
 
 L<Perinci::Sub::Gen::AccessTable>
 
-=head1 FUNCTIONS
-
-
-=head2 gen_read_dbi_table_func(%args) -> [status, msg, result, meta]
-
-Generate function (and its metadata) to read DBI table.
-
-The generated function acts like a simple single table SQL SELECT query,
-featuring filtering, ordering, and paging, but using arguments as the 'query
-language'. The generated function is suitable for exposing a table data from an
-API function. Please see Perinci::Sub::Gen::AccessTable's documentation for more
-details on what arguments the generated function will accept.
-
-Arguments ('*' denotes required arguments):
-
-=over 4
-
-=item * B<case_insensitive_search> => I<bool> (default: 1)
-
-Decide whether generated function will perform case-insensitive search.
-
-=item * B<custom_filters> => I<hash>
-
-Supply custom filters.
-
-A hash of filter name and definitions. Filter name will be used as generated
-function's argument and must not clash with other arguments. Filter definition
-is a hash containing these keys: B<meta> (hash, argument metadata), B<code>,
-B<fields> (array, list of table fields related to this field).
-
-Code will be called for each record to be filtered and will be supplied ($r, $v,
-$opts) where $v is the filter value (from the function argument) and $r the
-hashref record value. $opts is currently empty. Code should return true if
-record satisfies the filter.
-
-=item * B<custom_search> => I<code>
-
-Supply custom searching for generated function.
-
-Code will be supplied ($r, $q, $opts) where $r is the record (hashref), $q is
-the search term (from the function argument 'q'), and $opts is {ci=>0|1}. Code
-should return true if record matches search term.
-
-=item * B<dbh>* => I<obj>
-
-DBI database handle.
-
-=item * B<default_arg_values> => I<hash>
-
-Specify defaults for generated function's arguments.
-
-Can be used to supply default filters, e.g.
-
-    # limit years for credit card expiration date
-    { "year.min" => $curyear, "year.max" => $curyear+10, }
-
-=item * B<default_detail> => I<bool>
-
-Supply default 'detail' value for function arg spec.
-
-=item * B<default_fields> => I<str>
-
-Supply default 'fields' value for function arg spec.
-
-=item * B<default_random> => I<bool>
-
-Supply default 'random' value in generated function's metadata.
-
-=item * B<default_result_limit> => I<int>
-
-Supply default 'result_limit' value in generated function's metadata.
-
-=item * B<default_sort> => I<str>
-
-Supply default 'sort' value in generated function's metadata.
-
-=item * B<default_with_field_names> => I<bool>
-
-Supply default 'with_field_names' value in generated function's metadata.
-
-=item * B<description>* => I<str>
-
-Generated function's description.
-
-=item * B<enable_search> => I<bool> (default: 1)
-
-Decide whether generated function will support searching (argument q).
-
-=item * B<install> => I<bool> (default: 1)
-
-Whether to install generated function (and metadata).
-
-By default, generated function will be installed to the specified (or caller's)
-package, as well as its generated metadata into %SPEC. Set this argument to
-false to skip installing.
-
-=item * B<langs> => I<array> (default: ["en_US"])
-
-Choose language for function metadata.
-
-This function can generate metadata containing text from one or more languages.
-For example if you set 'langs' to ['enB<US', 'id>ID'] then the generated function
-metadata might look something like this:
-
-    {
-        v => 1.1,
-        args => {
-            random => {
-                summary => 'Random order of results', # English
-                "summary.alt.lang.id_ID" => "Acak urutan hasil", # Indonesian
-                ...
-            },
-            ...
-        },
-        ...
-    }
-
-=item * B<name>* => I<str>
-
-Generated function's name, e.g. `myfunc`.
-
-=item * B<package>* => I<str>
-
-Generated function's package, e.g. `My::Package`.
-
-This is needed mostly for installing the function. You usually don't need to
-supply this if you set C<install> to false.
-
-If not specified, caller's package will be used by default.
-
-=item * B<summary>* => I<str>
-
-Generated function's summary.
-
-=item * B<table_name>* => I<str>
-
-DBI table name.
-
-=item * B<table_spec>* => I<hash>
-
-Table specification.
-
-Just like Perinci::Sub::Gen::AccessTable's tableB<spec, except that each field
-specification can have a key called C<db_field> to specify the database field (if
-different). Currently this is required. Future version will be able to generate
-table>spec from table schema if table_spec is not specified.
-
-=item * B<word_search> => I<bool> (default: 0)
-
-Decide whether generated function will perform word searching instead of string searching.
-
-For example, if search term is 'pine' and field value is 'green pineapple',
-search will match if wordB<search=false, but won't match under word>search.
-
-This will not have effect under 'custom_search'.
-
-=back
-
-Return value:
-
-Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
-
 =head1 AUTHOR
 
 Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Steven Haryanto.
+This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
-=cut
+=head1 FUNCTIONS
 
+
+None are exported by default, but they are exportable.
+
+=head2 gen_read_dbi_table_func() -> [status, msg, result, meta]
+
+No arguments.
+
+Return value:
+
+Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
+
+=cut
