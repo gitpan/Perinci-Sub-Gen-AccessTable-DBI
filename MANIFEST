@@ -1,16 +1,13 @@
-Build.PL
 Changes
 LICENSE
 MANIFEST
 MANIFEST.SKIP
 META.json
 META.yml
+Makefile.PL
 README
 dist.ini
 lib/Perinci/Sub/Gen/AccessTable/DBI.pm
-lib/Perinci/Sub/Gen/AccessTable/DBI/I18N.pm
-lib/Perinci/Sub/Gen/AccessTable/DBI/I18N/en.pm
-lib/Perinci/Sub/Gen/AccessTable/DBI/I18N/id.pm
 t/00-compile.t
 t/func.t
 t/release-pod-coverage.t

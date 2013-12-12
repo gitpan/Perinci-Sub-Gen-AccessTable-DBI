@@ -1,13 +1,19 @@
 Revision history for Perinci-Sub-Gen-AccessTable-DBI
 
+0.08     2013-12-12 (SHARYANTO)
+
+         - No functional changes. Switch from Locale::Maketext to
+           Locale::TextDomain.
+
+
 0.07     2013-07-19 (SHARYANTO)
 
-         No functional changes. Fix test result [CT].
+         - No functional changes. Fix test result [CT].
 
 
 0.06     2012-11-02 (SHARYANTO)
 
-         No functional changes.
+         - No functional changes.
 
          [INCOMPATIBLE CHANGES]
 
@@ -18,7 +24,7 @@ Revision history for Perinci-Sub-Gen-AccessTable-DBI
 
 0.05     2012-08-07 (SHARYANTO)
 
-         No functional changes. Use Perinci::Exporter.
+         - No functional changes. Use Perinci::Exporter.
 
 
 0.04     2012-08-07 (SHARYANTO)
@@ -33,17 +39,17 @@ Revision history for Perinci-Sub-Gen-AccessTable-DBI
 
 0.03     2012-08-07 (SHARYANTO)
 
-         No functional changes. Adjust test to not open tempfile to see if this
-         will alleviate 'db is locked' SQLite error CT reports (mostly on
-         OpenBSD/FreeBSD).
+         - No functional changes. Adjust test to not open tempfile to see if
+           this will alleviate 'db is locked' SQLite error CT reports (mostly on
+           OpenBSD/FreeBSD).
 
 
 0.02     2012-07-11 (SHARYANTO)
 
-         No functional changes. Rebuild to update POD to
-         Perinci::Sub::Gen::AccessTable 0.14.
+         - No functional changes. Rebuild to update POD to
+           Perinci::Sub::Gen::AccessTable 0.14.
 
 
 0.01     2012-07-05 (SHARYANTO)
 
-         First release.
+         - First release.
