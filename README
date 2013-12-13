@@ -3,7 +3,7 @@ NAME
     metadata) to access DBI table data
 
 VERSION
-    version 0.08
+    version 0.09
 
 SYNOPSIS
     Your database table "countries":
@@ -102,188 +102,259 @@ DESCRIPTION
     Early versions tested on: SQLite.
 
 FUNCTIONS
-    None are exported by default, but they are exportable.
-
   gen_read_dbi_table_func(%args) -> [status, msg, result, meta]
-    The generated function acts like a simple single table SQL SELECT query,
-    featuring filtering, ordering, and paging, but using arguments as the
-    'query language'. The generated function is suitable for exposing a
+    {en_US Generate function (and its metadata) to read DBI table}.
+
+    {en_US The generated function acts like a simple single table SQL SELECT
+    query, featuring filtering, ordering, and paging, but using arguments as
+    the 'query language'. The generated function is suitable for exposing a
     table data from an API function. Please see
     Perinci::Sub::Gen::AccessTable's documentation for more details on what
-    arguments the generated function will accept.
+    arguments the generated function will accept. }
 
     Arguments ('*' denotes required arguments):
 
     *   case_insensitive_search => *bool* (default: 1)
 
-        Decide whether generated function will perform case-insensitive
-        search.
+        {en_US Generate function (and its metadata) to read DBI table}.
+
+        {en_US The generated function acts like a simple single table SQL
+        SELECT query, featuring filtering, ordering, and paging, but using
+        arguments as the 'query language'. The generated function is
+        suitable for exposing a table data from an API function. Please see
+        Perinci::Sub::Gen::AccessTable's documentation for more details on
+        what arguments the generated function will accept. }
 
     *   custom_filters => *hash*
 
-        Supply custom filters.
+        {en_US Generate function (and its metadata) to read DBI table}.
 
-        A hash of filter name and definitions. Filter name will be used as
-        generated function's argument and must not clash with other
-        arguments. Filter definition is a hash containing these keys: *meta*
-        (hash, argument metadata), *code*, *fields* (array, list of table
-        fields related to this field).
-
-        Code will be called for each record to be filtered and will be
-        supplied ($r, $v, $opts) where $v is the filter value (from the
-        function argument) and $r the hashref record value. $opts is
-        currently empty. Code should return true if record satisfies the
-        filter.
+        {en_US The generated function acts like a simple single table SQL
+        SELECT query, featuring filtering, ordering, and paging, but using
+        arguments as the 'query language'. The generated function is
+        suitable for exposing a table data from an API function. Please see
+        Perinci::Sub::Gen::AccessTable's documentation for more details on
+        what arguments the generated function will accept. }
 
     *   custom_search => *code*
 
-        Supply custom searching for generated function.
+        {en_US Generate function (and its metadata) to read DBI table}.
 
-        Code will be supplied ($r, $q, $opts) where $r is the record
-        (hashref), $q is the search term (from the function argument 'q'),
-        and $opts is {ci=>0|1}. Code should return true if record matches
-        search term.
+        {en_US The generated function acts like a simple single table SQL
+        SELECT query, featuring filtering, ordering, and paging, but using
+        arguments as the 'query language'. The generated function is
+        suitable for exposing a table data from an API function. Please see
+        Perinci::Sub::Gen::AccessTable's documentation for more details on
+        what arguments the generated function will accept. }
 
     *   dbh => *obj*
 
-        DBI database handle.
+        {en_US Generate function (and its metadata) to read DBI table}.
+
+        {en_US The generated function acts like a simple single table SQL
+        SELECT query, featuring filtering, ordering, and paging, but using
+        arguments as the 'query language'. The generated function is
+        suitable for exposing a table data from an API function. Please see
+        Perinci::Sub::Gen::AccessTable's documentation for more details on
+        what arguments the generated function will accept. }
 
     *   default_arg_values => *hash*
 
-        Specify defaults for generated function's arguments.
+        {en_US Generate function (and its metadata) to read DBI table}.
 
-        Can be used to supply default filters, e.g.
-
-            # limit years for credit card expiration date
-            { "year.min" => $curyear, "year.max" => $curyear+10, }
+        {en_US The generated function acts like a simple single table SQL
+        SELECT query, featuring filtering, ordering, and paging, but using
+        arguments as the 'query language'. The generated function is
+        suitable for exposing a table data from an API function. Please see
+        Perinci::Sub::Gen::AccessTable's documentation for more details on
+        what arguments the generated function will accept. }
 
     *   default_detail => *bool*
 
-        Supply default 'detail' value for function arg spec.
+        {en_US Generate function (and its metadata) to read DBI table}.
+
+        {en_US The generated function acts like a simple single table SQL
+        SELECT query, featuring filtering, ordering, and paging, but using
+        arguments as the 'query language'. The generated function is
+        suitable for exposing a table data from an API function. Please see
+        Perinci::Sub::Gen::AccessTable's documentation for more details on
+        what arguments the generated function will accept. }
 
     *   default_fields => *str*
 
-        Supply default 'fields' value for function arg spec.
+        {en_US Generate function (and its metadata) to read DBI table}.
+
+        {en_US The generated function acts like a simple single table SQL
+        SELECT query, featuring filtering, ordering, and paging, but using
+        arguments as the 'query language'. The generated function is
+        suitable for exposing a table data from an API function. Please see
+        Perinci::Sub::Gen::AccessTable's documentation for more details on
+        what arguments the generated function will accept. }
 
     *   default_random => *bool*
 
-        Supply default 'random' value in generated function's metadata.
+        {en_US Generate function (and its metadata) to read DBI table}.
+
+        {en_US The generated function acts like a simple single table SQL
+        SELECT query, featuring filtering, ordering, and paging, but using
+        arguments as the 'query language'. The generated function is
+        suitable for exposing a table data from an API function. Please see
+        Perinci::Sub::Gen::AccessTable's documentation for more details on
+        what arguments the generated function will accept. }
 
     *   default_result_limit => *int*
 
-        Supply default 'result_limit' value in generated function's
-        metadata.
+        {en_US Generate function (and its metadata) to read DBI table}.
+
+        {en_US The generated function acts like a simple single table SQL
+        SELECT query, featuring filtering, ordering, and paging, but using
+        arguments as the 'query language'. The generated function is
+        suitable for exposing a table data from an API function. Please see
+        Perinci::Sub::Gen::AccessTable's documentation for more details on
+        what arguments the generated function will accept. }
 
     *   default_sort => *str*
 
-        Supply default 'sort' value in generated function's metadata.
+        {en_US Generate function (and its metadata) to read DBI table}.
+
+        {en_US The generated function acts like a simple single table SQL
+        SELECT query, featuring filtering, ordering, and paging, but using
+        arguments as the 'query language'. The generated function is
+        suitable for exposing a table data from an API function. Please see
+        Perinci::Sub::Gen::AccessTable's documentation for more details on
+        what arguments the generated function will accept. }
 
     *   default_with_field_names => *bool*
 
-        Supply default 'with_field_names' value in generated function's
-        metadata.
+        {en_US Generate function (and its metadata) to read DBI table}.
+
+        {en_US The generated function acts like a simple single table SQL
+        SELECT query, featuring filtering, ordering, and paging, but using
+        arguments as the 'query language'. The generated function is
+        suitable for exposing a table data from an API function. Please see
+        Perinci::Sub::Gen::AccessTable's documentation for more details on
+        what arguments the generated function will accept. }
 
     *   description => *str*
 
-        Generated function's description.
+        {en_US Generate function (and its metadata) to read DBI table}.
+
+        {en_US The generated function acts like a simple single table SQL
+        SELECT query, featuring filtering, ordering, and paging, but using
+        arguments as the 'query language'. The generated function is
+        suitable for exposing a table data from an API function. Please see
+        Perinci::Sub::Gen::AccessTable's documentation for more details on
+        what arguments the generated function will accept. }
 
     *   enable_search => *bool* (default: 1)
 
-        Decide whether generated function will support searching (argument
-        q).
+        {en_US Generate function (and its metadata) to read DBI table}.
+
+        {en_US The generated function acts like a simple single table SQL
+        SELECT query, featuring filtering, ordering, and paging, but using
+        arguments as the 'query language'. The generated function is
+        suitable for exposing a table data from an API function. Please see
+        Perinci::Sub::Gen::AccessTable's documentation for more details on
+        what arguments the generated function will accept. }
 
     *   hooks => *hash*
 
-        Supply hooks.
+        {en_US Generate function (and its metadata) to read DBI table}.
 
-        You can instruct the generated function to execute codes in various
-        stages by using hooks. Currently available hooks are:
-        "before_parse_query", "after_parse_query", "before_fetch_data",
-        "after_fetch_data", "before_return". Hooks will be passed the
-        function arguments as well as one or more additional ones. All hooks
-        will get "_stage" (name of stage) and "_func_res" (function
-        arguments, but as hash reference so you can modify it).
-        "after_parse_query" and later hooks will also get "_parse_res"
-        (parse result). "before_fetch_data" and later will also get
-        "_query". "after_fetch_data" and later will also get "_data".
-        "before_return" will also get "_func_res" (the enveloped response to
-        be returned to user).
-
-        Hook should return nothing or a false value on success. It can abort
-        execution of the generated function if it returns an envelope
-        response (an array). On that case, the function will return with
-        this return value.
+        {en_US The generated function acts like a simple single table SQL
+        SELECT query, featuring filtering, ordering, and paging, but using
+        arguments as the 'query language'. The generated function is
+        suitable for exposing a table data from an API function. Please see
+        Perinci::Sub::Gen::AccessTable's documentation for more details on
+        what arguments the generated function will accept. }
 
     *   install => *bool* (default: 1)
 
-        Whether to install generated function (and metadata).
+        {en_US Generate function (and its metadata) to read DBI table}.
 
-        By default, generated function will be installed to the specified
-        (or caller's) package, as well as its generated metadata into %SPEC.
-        Set this argument to false to skip installing.
+        {en_US The generated function acts like a simple single table SQL
+        SELECT query, featuring filtering, ordering, and paging, but using
+        arguments as the 'query language'. The generated function is
+        suitable for exposing a table data from an API function. Please see
+        Perinci::Sub::Gen::AccessTable's documentation for more details on
+        what arguments the generated function will accept. }
 
     *   langs => *array* (default: ["en_US"])
 
-        Choose language for function metadata.
+        {en_US Generate function (and its metadata) to read DBI table}.
 
-        This function can generate metadata containing text from one or more
-        languages. For example if you set 'langs' to ['en*US', 'id*ID'] then
-        the generated function metadata might look something like this:
-
-            {
-                v => 1.1,
-                args => {
-                    random => {
-                        summary => 'Random order of results', # English
-                        "summary.alt.lang.id_ID" => "Acak urutan hasil", # Indonesian
-                        ...
-                    },
-                    ...
-                },
-                ...
-            }
+        {en_US The generated function acts like a simple single table SQL
+        SELECT query, featuring filtering, ordering, and paging, but using
+        arguments as the 'query language'. The generated function is
+        suitable for exposing a table data from an API function. Please see
+        Perinci::Sub::Gen::AccessTable's documentation for more details on
+        what arguments the generated function will accept. }
 
     *   name* => *str*
 
-        Generated function's name, e.g. `myfunc`.
+        {en_US Generate function (and its metadata) to read DBI table}.
+
+        {en_US The generated function acts like a simple single table SQL
+        SELECT query, featuring filtering, ordering, and paging, but using
+        arguments as the 'query language'. The generated function is
+        suitable for exposing a table data from an API function. Please see
+        Perinci::Sub::Gen::AccessTable's documentation for more details on
+        what arguments the generated function will accept. }
 
     *   package => *str*
 
-        Generated function's package, e.g. `My::Package`.
+        {en_US Generate function (and its metadata) to read DBI table}.
 
-        This is needed mostly for installing the function. You usually don't
-        need to supply this if you set "install" to false.
-
-        If not specified, caller's package will be used by default.
+        {en_US The generated function acts like a simple single table SQL
+        SELECT query, featuring filtering, ordering, and paging, but using
+        arguments as the 'query language'. The generated function is
+        suitable for exposing a table data from an API function. Please see
+        Perinci::Sub::Gen::AccessTable's documentation for more details on
+        what arguments the generated function will accept. }
 
     *   summary => *str*
 
-        Generated function's summary.
+        {en_US Generate function (and its metadata) to read DBI table}.
+
+        {en_US The generated function acts like a simple single table SQL
+        SELECT query, featuring filtering, ordering, and paging, but using
+        arguments as the 'query language'. The generated function is
+        suitable for exposing a table data from an API function. Please see
+        Perinci::Sub::Gen::AccessTable's documentation for more details on
+        what arguments the generated function will accept. }
 
     *   table_name* => *str*
 
-        DBI table name.
+        {en_US Generate function (and its metadata) to read DBI table}.
+
+        {en_US The generated function acts like a simple single table SQL
+        SELECT query, featuring filtering, ordering, and paging, but using
+        arguments as the 'query language'. The generated function is
+        suitable for exposing a table data from an API function. Please see
+        Perinci::Sub::Gen::AccessTable's documentation for more details on
+        what arguments the generated function will accept. }
 
     *   table_spec* => *hash*
 
-        Table specification.
+        {en_US Generate function (and its metadata) to read DBI table}.
 
-        Just like Perinci::Sub::Gen::AccessTable's table*spec, except that
-        each field specification can have a key called "db_field" to specify
-        the database field (if different). Currently this is required.
-        Future version will be able to generate table*spec from table schema
-        if table_spec is not specified.
+        {en_US The generated function acts like a simple single table SQL
+        SELECT query, featuring filtering, ordering, and paging, but using
+        arguments as the 'query language'. The generated function is
+        suitable for exposing a table data from an API function. Please see
+        Perinci::Sub::Gen::AccessTable's documentation for more details on
+        what arguments the generated function will accept. }
 
     *   word_search => *bool* (default: 0)
 
-        Decide whether generated function will perform word searching
-        instead of string searching.
+        {en_US Generate function (and its metadata) to read DBI table}.
 
-        For example, if search term is 'pine' and field value is 'green
-        pineapple', search will match if word*search=false, but won't match
-        under word*search.
-
-        This will not have effect under 'custom_search'.
+        {en_US The generated function acts like a simple single table SQL
+        SELECT query, featuring filtering, ordering, and paging, but using
+        arguments as the 'query language'. The generated function is
+        suitable for exposing a table data from an API function. Please see
+        Perinci::Sub::Gen::AccessTable's documentation for more details on
+        what arguments the generated function will accept. }
 
     Return value:
 

@@ -21,7 +21,7 @@ requires:
   DBI: 0
   Data::Clone: 0
   Data::Sah: 0
-  Locale::TextDomain: 0
+  Locale::TextDomain::UTF8: 0
   Log::Any: 0
   Perinci::Sub::Gen::AccessTable: 0.18
   Rinci: v1.1.13
@@ -30,7 +30,7 @@ resources:
   bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=Perinci-Sub-Gen-AccessTable-DBI
   homepage: https://metacpan.org/release/Perinci-Sub-Gen-AccessTable-DBI
   repository: git://github.com/sharyanto/perl-Perinci-Sub-Gen-AccessTable-DBI.git
-version: 0.08
+version: 0.09
 x_Dist_Zilla:
   perl:
     version: 5.010001
@@ -170,7 +170,7 @@ x_Dist_Zilla:
             -
               class: Pod::Weaver::Plugin::Perinci
               name: '@Author::SHARYANTO/Perinci'
-              version: 0.12
+              version: 0.14
             -
               class: Pod::Weaver::Section::Leftovers
               name: '@Author::SHARYANTO/Leftovers'
