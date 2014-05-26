@@ -1,5 +1,12 @@
 Revision history for Perinci-Sub-Gen-AccessTable-DBI
 
+0.10     2014-05-26 (SHARYANTO)
+
+         - No functional changes.
+
+         - App 'use experimental smartmatch' for perl 5.18+.
+
+
 0.09     2013-12-13 (SHARYANTO)
 
          - No functional changes. Use Locale::TextDomain::UTF8.
