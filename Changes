@@ -1,5 +1,12 @@
 Revision history for Perinci-Sub-Gen-AccessTable-DBI
 
+0.11     2014-05-27 (SHARYANTO)
+
+         - No functional changes.
+
+         - Update prereq version to avoid CT failure reports.
+
+
 0.10     2014-05-26 (SHARYANTO)
 
          - No functional changes.

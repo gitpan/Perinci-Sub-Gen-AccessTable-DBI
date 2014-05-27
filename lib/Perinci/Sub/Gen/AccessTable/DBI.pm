@@ -15,7 +15,7 @@ require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(gen_read_dbi_table_func);
 
-our $VERSION = '0.10'; # VERSION
+our $VERSION = '0.11'; # VERSION
 
 our %SPEC;
 my $label = "(gen_read_dbi_table_func)";
@@ -204,7 +204,7 @@ Perinci::Sub::Gen::AccessTable::DBI - Generate function (and its Rinci metadata)
 
 =head1 VERSION
 
-This document describes version 0.10 of Perinci::Sub::Gen::AccessTable::DBI (from Perl distribution Perinci-Sub-Gen-AccessTable-DBI), released on 2014-05-26.
+This document describes version 0.11 of Perinci::Sub::Gen::AccessTable::DBI (from Perl distribution Perinci-Sub-Gen-AccessTable-DBI), released on 2014-05-27.
 
 =head1 SYNOPSIS
 
@@ -388,9 +388,37 @@ Supply default 'with_field_names' value in generated function's metadata.
 
 Generated function's description.
 
+=item * B<enable_field_selection> => I<bool> (default: 1)
+
+Decide whether generated function will support field selection (the `fields` argument).
+
+=item * B<enable_filtering> => I<bool> (default: 1)
+
+Decide whether generated function will support filtering (the FIELD, FIELD.is, FIELD.min, etc arguments).
+
+=item * B<enable_ordering> => I<bool> (default: 1)
+
+Decide whether generated function will support ordering (the `sort` & `random` arguments).
+
+=item * B<enable_paging> => I<bool> (default: 1)
+
+Decide whether generated function will support paging (the `result_limit` & `result_start` arguments).
+
+=item * B<enable_random_ordering> => I<bool> (default: 1)
+
+Decide whether generated function will support random ordering (the `random` argument).
+
+Ordering must also be enabled (C<enable_ordering>).
+
 =item * B<enable_search> => I<bool> (default: 1)
 
 Decide whether generated function will support searching (argument q).
+
+Filtering must also be enabled (C<enable_filtering>).
+
+=item * B<extra_args> => I<hash>
+
+Extra arguments for the generated function.
 
 =item * B<hooks> => I<hash>
 

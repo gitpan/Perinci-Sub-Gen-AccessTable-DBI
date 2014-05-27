@@ -3,9 +3,9 @@ NAME
     metadata) to access DBI table data
 
 VERSION
-    This document describes version 0.10 of
+    This document describes version 0.11 of
     Perinci::Sub::Gen::AccessTable::DBI (from Perl distribution
-    Perinci-Sub-Gen-AccessTable-DBI), released on 2014-05-26.
+    Perinci-Sub-Gen-AccessTable-DBI), released on 2014-05-27.
 
 SYNOPSIS
     Your database table "countries":
@@ -189,10 +189,43 @@ FUNCTIONS
 
         Generated function's description.
 
+    *   enable_field_selection => *bool* (default: 1)
+
+        Decide whether generated function will support field selection (the
+        `fields` argument).
+
+    *   enable_filtering => *bool* (default: 1)
+
+        Decide whether generated function will support filtering (the FIELD,
+        FIELD.is, FIELD.min, etc arguments).
+
+    *   enable_ordering => *bool* (default: 1)
+
+        Decide whether generated function will support ordering (the `sort`
+        & `random` arguments).
+
+    *   enable_paging => *bool* (default: 1)
+
+        Decide whether generated function will support paging (the
+        `result_limit` & `result_start` arguments).
+
+    *   enable_random_ordering => *bool* (default: 1)
+
+        Decide whether generated function will support random ordering (the
+        `random` argument).
+
+        Ordering must also be enabled ("enable_ordering").
+
     *   enable_search => *bool* (default: 1)
 
         Decide whether generated function will support searching (argument
         q).
+
+        Filtering must also be enabled ("enable_filtering").
+
+    *   extra_args => *hash*
+
+        Extra arguments for the generated function.
 
     *   hooks => *hash*
 
